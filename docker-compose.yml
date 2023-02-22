@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  webserver:
+    image: nginx:alpine
+    container_name: webserver-nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./ssl:/etc/nginx/ssl
+    networks:
+      - webserver-network
+    
+networks:
+  webserver-network:
+    driver: bridge
